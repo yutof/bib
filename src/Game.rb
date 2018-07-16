@@ -4,7 +4,12 @@ class Game
     @players = p
     @deck = d
     @board = GameBoard.new()
-    @positionSelector = ps;
+    @positionSelector = ps
+    @totalRound = 0
+  end
+
+  def TotalRound
+    @totalRound
   end
 
   def IsGameEnded()
@@ -22,6 +27,7 @@ class Game
   end
 
   def PlayRound()
+      @totalRound += 1
       @board.Reset()
       @board.SetCommunityCard(SelectCommunityCard())
       idx = 0
@@ -50,7 +56,7 @@ class Game
     while IsGameEnded() == false and @deck.IsEmpty() == false do
       PlayRound()
     end
-    puts "ゲーム終了時の残り枚数 #{@deck.Length()}"
+    #puts "ゲーム終了時の残り枚数 #{@deck.Length()}"
   end
 
   def ToString()

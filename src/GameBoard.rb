@@ -29,10 +29,28 @@ class GameBoard
   	end
 
   	def SelectSunValue()
-  		@values = Array.new()
-  		@playerData.each {|p|@values << p.Card.GetValue()}
-  		@values << @communityCard.GetValue() if @playerData.length % 2 == 0
-  		@sunValue = @values.sort()[2]#中央値 
+  		values = Array.new()
+  		@playerData.each {|p|values << p.Card.GetValue()}
+  		values << @communityCard.GetValue() if @playerData.length % 2 == 0
+  		if AreAllValuesGreaterThanCommunityCard(values)
+  			@sunValue = values.sort()[values.length - 1]
+  		elsif AreAllValuesSmallerThanCommunityCard(values)
+  		 	@sunValue = values.sort()[0]#中央値 
+  		else 
+  			@sunValue = values.sort()[2]#中央値 
+  		end
+  	end
+
+  	def AreAllValuesGreaterThanCommunityCard(values)
+  		allGreater = true
+  		values.each {|v| allGreater = false if v < @communityCard.GetValue()}
+  		allGreater
+  	end
+
+  	def AreAllValuesSmallerThanCommunityCard(values)
+  		allSmaller = true
+  		values.each {|v| allSmaller = false if v > @communityCard.GetValue()}
+  		allSmaller
   	end
 
   	def AddRewardAndPenalty()
@@ -84,7 +102,7 @@ class GameBoard
 	def ToString()
 		str = ""
 		@playerData.each {|p|str += p.Player.ToString() + "\n"}
-		str
+		str + "\n"
 	end
 
 	def Dump()

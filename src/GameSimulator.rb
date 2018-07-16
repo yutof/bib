@@ -41,32 +41,28 @@ def SetupPlayers()
 	end
 end
 
-def DrawAllCards()
-	while @Deck.IsNotEmpty() do
-		@Players.each {|p|p.Draw(@Deck.Draw()) if @Deck.IsNotEmpty()}
-	end
-end
-
-def PrintPlayers()
-	@Players.each {|p|
-		puts "Average ? #{p.GetAverageValue().round(2)} Length #{p.GetCardsCount()}\n"
-	}
-end
-
 def Simulate(n)
 	for i in 1..n
 		InitVars()
 		game = Game.new(@Players, @Deck, @positionSelector)
 		game.PlayGame()
-		game.Dump()
+		#game.Dump()
+		@totalRound += game.TotalRound
+		@remainingCards += @Deck.Length()
 	end
 end
 
+
+@totalRound = 0
+@remainingCards = 0
 
 start = Time.now
 puts "Start the game!"
 @positionSelector = PositionSelector.new()
 Simulate(SIMULATE_N_TIMES)
+puts "Average round : #{@totalRound * 1.0 / SIMULATE_N_TIMES}"
+puts "Average remaining cards : #{@remainingCards * 1.0 / SIMULATE_N_TIMES}"
+
 finish = Time.now
 diff = finish - start
 puts "Ended. Took #{diff}"
