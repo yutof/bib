@@ -1,0 +1,30 @@
+#!/usr/bin/ruby
+
+PRINT_ENABLED = true
+NUM_OF_PLAYERS = 5
+INITIAL_CARD_NUM = 5
+
+#Deckの中身
+MINIMUM_CARD_NUMER = 1
+MAX_CARD_NUMER = 110
+
+#ゲームボードの設定
+NUMBER_OF_AREAS = 4
+HOME_INDEX = 4
+AREA_CONFIZG = [88, 71, 55, 22, 0]
+
+PENALTIES = [2,1,1,1,0]
+INITIAL_SEEDS = 5
+AREA_AVAILABILITY = {
+	0 => 1,
+	1 => 1,
+	2 => 2,
+	3 => 3,
+}
+#報酬設定
+REWARDS = [4,3,2,1,0]
+SEED_TO_FLOWER_RATE = 5
+GAME_WINNER_VP = 5
+# Simulationの回数
+SIMULATE_N_TIMES = 1
+
