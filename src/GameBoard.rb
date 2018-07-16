@@ -82,7 +82,7 @@ class GameBoard
   	end
 
 	def ToString()
-		str = "CC #{@communityCard.ToString()}\n"
+		str = ""
 		@playerData.each {|p|str += p.Player.ToString() + "\n"}
 		str
 	end
