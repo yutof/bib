@@ -68,7 +68,7 @@ class Player
   end
 
   def ToString()
-    "Player(#{@id})  vp:#{@vp} seed:#{@seedsCount}"
+    "Player(#{@id})  vp:#{@vp} seed:#{@seedsCount}  card #{@cards.length}"
   end
 
   def Dump()

@@ -9,7 +9,7 @@ load 'GameBoardPlayer.rb'
 load 'PositionSelector.rb'
 
 
-@positionSelector = PositionSelector.new()
+
 
 def puts(o)
   if PRINT_ENABLED
@@ -57,7 +57,7 @@ def Simulate(n)
 	for i in 1..n
 		InitVars()
 		game = Game.new(@Players, @Deck, @positionSelector)
-		game.PlayRound()
+		game.PlayGame()
 		game.Dump()
 	end
 end
@@ -65,6 +65,7 @@ end
 
 start = Time.now
 puts "Start the game!"
+@positionSelector = PositionSelector.new()
 Simulate(SIMULATE_N_TIMES)
 finish = Time.now
 diff = finish - start

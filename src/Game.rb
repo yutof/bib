@@ -8,7 +8,13 @@ class Game
   end
 
   def IsGameEnded()
-    false
+      aliveCount = 0
+      winnerCount = 0
+      @players.each {|p|
+        aliveCount += 1 if p.IsAlive()
+        winnerCount += 1 if p.IsWinner()
+      }
+      winnerCount > 0 or aliveCount == 0
   end
 
   def SelectCommunityCard()
@@ -16,8 +22,8 @@ class Game
   end
 
   def PlayRound()
+      @board.Reset()
       @board.SetCommunityCard(SelectCommunityCard())
-
       idx = 0
       @players.each {|p|
         pos = @positionSelector.SelectPosition()
@@ -30,11 +36,21 @@ class Game
       @board.SelectSunValue()
       @board.AddRewardAndPenalty()
       @board.AddVictoryPoint()
+      DrawCards()
+  end
 
+  def DrawCards()
+      @players.each {|p|
+          p.Draw(@deck.Draw())
+      }
   end
 
   def PlayGame()
-      puts "todo"
+
+    while IsGameEnded() == false and @deck.IsEmpty() == false do
+      PlayRound()
+    end
+    puts "ゲーム終了時の残り枚数 #{@deck.Length()}"
   end
 
   def ToString()
