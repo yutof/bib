@@ -33,9 +33,9 @@ class GameBoard
   		@playerData.each {|p|values << p.Card.GetValue()}
   		values << @communityCard.GetValue() if @playerData.length % 2 == 0
   		if AreAllValuesGreaterThanCommunityCard(values)
-  			@sunValue = values.sort()[values.length - 1]
+  			@sunValue = values.sort()[values.length - 1]#最大値
   		elsif AreAllValuesSmallerThanCommunityCard(values)
-  		 	@sunValue = values.sort()[0]#中央値 
+  		 	@sunValue = values.sort()[0]#最小値
   		else 
   			@sunValue = values.sort()[2]#中央値 
   		end
